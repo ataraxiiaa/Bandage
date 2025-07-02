@@ -5,6 +5,6 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: process.env.NODE_ENV === 'production', // Use CDN in production for better performance
-  perspective: 'published', // Only fetch published documents
+  useCdn: process.env.NODE_ENV === 'production',
+  perspective: 'published', 
 })
