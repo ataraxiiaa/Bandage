@@ -89,7 +89,7 @@ const Hero = () => {
             planName = 'PREMIUM';
         }
 
-        router.push(data.checkoutUrl || `/checkout?amount=${selectedPrice}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}&plan=${planName}`);
+        router.push(`/checkout?amount=${selectedPrice}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}&plan=${planName}`);
 
         
         (form.elements.namedItem('name') as HTMLInputElement).value = '';
@@ -110,14 +110,14 @@ const Hero = () => {
                     <label className="inline-flex items-center cursor-pointer mb-2">
                         <input type="checkbox" value="" className="sr-only peer" />
                         <span className="ms-3 text-sm font-bold text-black mr-5">Monthly</span>
-                        <div className="relative w-11 h-6 bg-white peer-focus:bg-white peer-focus:outline-none 
-                peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full 
+                        <div className="relative w-11 h-6 bg-white rounded-full 
+                peer-focus:outline-none peer-focus:ring-0 
                 peer dark:bg-white peer-checked:after:translate-x-full 
                 rtl:peer-checked:after:-translate-x-full 
                 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] 
-                after:bg-white after:border-gray-300 after:border 
+                after:bg-white after:border-0 
                 after:rounded-full after:h-5 after:w-5 after:transition-all 
-                dark:border-blue-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
+                peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"></div>
                     </label>
                 </div>
             </div>
