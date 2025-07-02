@@ -35,10 +35,7 @@ export async function POST(request: NextRequest) {
       userid: userId,
     };
 
-    await db
-      .insert(payments)
-      .values(paymentData)
-      .returning();
+    await db.insert(payments).values(paymentData).returning();
 
     return NextResponse.json({
       status: 'succeeded',

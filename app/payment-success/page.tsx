@@ -15,14 +15,11 @@ function PaymentSuccessContent() {
   const [transactionIdState, setTransactionId] = useState<string>('');
 
   useEffect(() => {
-    // Handle FREE package (no payment intent)
     if (plan === 'FREE' && transactionId) {
       setPaymentStatus('succeeded');
       setTransactionId(transactionId);
       return;
     }
-
-    // Handle paid packages
     if (paymentIntent && amount) {
       const apiUrl = email 
         ? `/api/verify-payment?payment_intent=${paymentIntent}&email=${encodeURIComponent(email)}`
