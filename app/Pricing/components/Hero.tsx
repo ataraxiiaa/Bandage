@@ -80,7 +80,7 @@ const Hero = () => {
             closeModal();
             return;
         }
-        const data = await response.json();
+        await response.json();
 
         let planName = 'STANDARD';
         if (selectedPrice === 9.99) {
@@ -163,7 +163,7 @@ const Hero = () => {
                                 <span className="font-semibold">Email and community support</span>
                             </li>
                         </ul>
-                        <button onClick={() => { setshowModal(true); setSelectedPrice(prices[0]) }} className="text-white bg-[#252B42] hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-primary-900">Try For free</button>
+                        <button onClick={() => { setshowModal(true); setSelectedPrice(prices[0]) }} className="text-white bg-[#252B42] focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-primary-900 hover:bg-blue-600 transition">Try For free</button>
                     </div>
 
                     {/* Pricing Card */}
@@ -204,7 +204,7 @@ const Hero = () => {
                                 <span className="font-semibold">Email and community support</span>
                             </li>
                         </ul>
-                        <button onClick={() => { setshowModal(true); setSelectedPrice(prices[1]) }} className="text-white bg-[#23A6F0] hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-primary-900">Get started</button>
+                        <button onClick={() => { setshowModal(true); setSelectedPrice(prices[1]) }} className="text-white bg-[#23A6F0] hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-primary-900 hover:bg-blue-600 transition">Get started</button>
                     </div>
                     {/* Pricing Card */}
                     <div className="flex flex-col p-6 w-full lg:w-80 text-center text-gray-900 bg-white border border-blue-400 shadow">
@@ -244,7 +244,7 @@ const Hero = () => {
                                 <span className="font-semibold">Email and community support</span>
                             </li>
                         </ul>
-                        <button onClick={() => { setshowModal(true); setSelectedPrice(prices[2]) }} className="text-white bg-[#23A6F0] hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-primary-900">Get started</button>
+                        <button onClick={() => { setshowModal(true); setSelectedPrice(prices[2]) }} className="text-white bg-[#23A6F0] hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-primary-900 hover:bg-blue-600 transition">Get started</button>
                     </div>
                 </div>
             </div>

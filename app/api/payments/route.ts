@@ -1,12 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+// Verify Stripe key exists
+const stripeKey = process.env.STRIPE_SECRET_KEY;
+if (!stripeKey) {
+  console.error("STRIPE_SECRET_KEY environment variable is not set");
+  throw new Error("Stripe configuration is missing");
+}
+
+const stripe = new Stripe(stripeKey, {
   apiVersion: '2025-05-28.basil',
 });
 
 export async function POST(request: NextRequest) {
   try {
+    // Log environment check
+    console.log("Stripe key exists:", !!stripeKey);
+    console.log("Stripe key length:", stripeKey?.length || 0);
+    
     const { amount } = await request.json();
 
     if (!amount || amount <= 0) {

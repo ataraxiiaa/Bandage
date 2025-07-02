@@ -5,5 +5,6 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: false, // Set to false for server-side usage, true for client-side
+  useCdn: process.env.NODE_ENV === 'production', // Use CDN in production for better performance
+  perspective: 'published', // Only fetch published documents
 })

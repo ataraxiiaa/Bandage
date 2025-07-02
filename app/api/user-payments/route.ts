@@ -15,7 +15,16 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    let userPayments: any[] = [];
+    type UserPayment = {
+      id: number;
+      stripeid: string;
+      amount: number;
+      createdAt: Date;
+      userEmail?: string;
+      userName?: string;
+    };
+
+    let userPayments: UserPayment[] = [];
 
     if (userId) {
       userPayments = await db
@@ -27,7 +36,7 @@ export async function GET(request: NextRequest) {
         })
         .from(payments)
         .where(eq(payments.userid, parseInt(userId)))
-        .orderBy(desc(payments.created_at));
+        .orderBy(desc(payments.created_at)) as UserPayment[];
     } else if (userEmail) {
       userPayments = await db
         .select({
@@ -41,7 +50,7 @@ export async function GET(request: NextRequest) {
         .from(payments)
         .innerJoin(users, eq(payments.userid, users.id))
         .where(eq(users.email, userEmail))
-        .orderBy(desc(payments.created_at));
+        .orderBy(desc(payments.created_at)) as UserPayment[];
     }
 
     return NextResponse.json({

@@ -3,7 +3,13 @@ import Stripe from 'stripe';
 import { db, payments, users, NewPayment } from '@/app/lib/drizzle';
 import { eq } from 'drizzle-orm';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+const stripeKey = process.env.STRIPE_SECRET_KEY;
+if (!stripeKey) {
+  console.error("STRIPE_SECRET_KEY environment variable is not set");
+  throw new Error("Stripe configuration is missing");
+}
+
+const stripe = new Stripe(stripeKey, {
   apiVersion: '2025-05-28.basil',
 });
 
@@ -69,7 +75,7 @@ export async function GET(request: NextRequest) {
           console.log('Payment already exists in database');
         }
       } catch (dbError) {
-        console.error('Error saving payment to database');
+        console.error('Error saving payment to database',dbError);
       }
     }
 

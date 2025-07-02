@@ -82,7 +82,7 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
         window.location.href = `/payment-success?amount=${amount}&payment_intent=${paymentIntent.id}&email=${encodeURIComponent(email)}&plan=${plan}`;
       }
     } catch (confirmError) {
-      setErrorMessage("An unexpected error occurred. Please try again.");
+      setErrorMessage("An unexpected error occurred. Please try again." + confirmError);
     }
 
     setLoading(false);
