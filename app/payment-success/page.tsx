@@ -9,11 +9,21 @@ function PaymentSuccessContent() {
   const amount = searchParams.get('amount');
   const paymentIntent = searchParams.get('payment_intent');
   const email = searchParams.get('email');
+  const plan = searchParams.get('plan');
+  const transactionId = searchParams.get('transactionId');
   const [paymentStatus, setPaymentStatus] = useState<'loading' | 'succeeded' | 'failed'>('loading');
-  const [transactionId, setTransactionId] = useState<string>('');
+  const [transactionIdState, setTransactionId] = useState<string>('');
 
   useEffect(() => {
-    if (paymentIntent) {
+    // Handle FREE package (no payment intent)
+    if (plan === 'FREE' && transactionId) {
+      setPaymentStatus('succeeded');
+      setTransactionId(transactionId);
+      return;
+    }
+
+    // Handle paid packages
+    if (paymentIntent && amount) {
       const apiUrl = email 
         ? `/api/verify-payment?payment_intent=${paymentIntent}&email=${encodeURIComponent(email)}`
         : `/api/verify-payment?payment_intent=${paymentIntent}`;
@@ -32,7 +42,7 @@ function PaymentSuccessContent() {
       setPaymentStatus('succeeded');
       setTransactionId(Date.now().toString());
     }
-  }, [paymentIntent, email]);
+  }, [paymentIntent, email, amount, plan, transactionId]);
 
   if (paymentStatus === 'loading') {
     return (
@@ -74,24 +84,34 @@ function PaymentSuccessContent() {
       <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center">
         
         <h1 className="text-2xl font-bold text-gray-900 mb-4">
-          Payment Successful!
+          {plan === 'FREE' ? 'Registration Successful!' : 'Payment Successful!'}
         </h1>
         
         <p className="text-gray-600 mb-6">
-          Thank you for your payment. Your transaction has been completed successfully.
+          {plan === 'FREE' 
+            ? 'Thank you for signing up! You have successfully registered for our FREE package.' 
+            : 'Thank you for your payment. Your transaction has been completed successfully.'
+          }
         </p>
         
-        {amount && (
+        {plan && (
+          <div className="bg-blue-50 rounded-lg p-4 mb-6">
+            <p className="text-sm text-gray-500">Selected Plan</p>
+            <p className="text-xl font-semibold text-gray-900">{plan}</p>
+          </div>
+        )}
+        
+        {amount && Number(amount) > 0 && (
           <div className="bg-gray-50 rounded-lg p-4 mb-6">
             <p className="text-sm text-gray-500">Amount Paid</p>
             <p className="text-xl font-semibold text-gray-900">${amount}</p>
           </div>
         )}
 
-        {transactionId && (
+        {transactionIdState && (
           <div className="bg-blue-50 rounded-lg p-4 mb-6">
             <p className="text-sm text-gray-500">Transaction ID</p>
-            <p className="text-sm font-mono text-gray-700 break-all">{transactionId}</p>
+            <p className="text-sm font-mono text-gray-700 break-all">{transactionIdState}</p>
           </div>
         )}
 

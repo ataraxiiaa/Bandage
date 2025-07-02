@@ -39,7 +39,6 @@ const Hero = () => {
             alert('Please fill in all fields');
             return;
         }
-        
         const response = await fetch('/api/checkout_session', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -55,9 +54,42 @@ const Hero = () => {
             alert('Failed to create checkout session');
             return;
         }
+        
+        if(selectedPrice === 0) {
+            const freeResponse = await fetch('/api/free-registration', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    phone
+                })
+            });
 
+            if (!freeResponse.ok) {
+                alert('Failed to register for FREE package');
+                return;
+            }
+
+            const freeData = await freeResponse.json();
+            router.push(`/payment-success?amount=0&plan=FREE&email=${encodeURIComponent(email)}&transactionId=${freeData.transactionId}`);
+            
+            (form.elements.namedItem('name') as HTMLInputElement).value = '';
+            (form.elements.namedItem('email') as HTMLInputElement).value = '';
+            (form.elements.namedItem('number') as HTMLInputElement).value = '';
+            closeModal();
+            return;
+        }
         const data = await response.json();
-        router.push(data.checkoutUrl || `/checkout?amount=${selectedPrice}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}`);
+
+        let planName = 'STANDARD';
+        if (selectedPrice === 9.99) {
+            planName = 'STANDARD';
+        } else if (selectedPrice === 19.99) {
+            planName = 'PREMIUM';
+        }
+
+        router.push(data.checkoutUrl || `/checkout?amount=${selectedPrice}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&phone=${encodeURIComponent(phone)}&plan=${planName}`);
 
         
         (form.elements.namedItem('name') as HTMLInputElement).value = '';

@@ -1,9 +1,13 @@
 "use client";
 
 import { ChevronRight } from 'lucide-react';
+import React, { useState } from "react";
 import Link from "next/link";
 
 const PricingFAQs = () => {
+
+    const [hideanswerid, setHideAnswerid] = useState(-1);
+
     const faqs = [
         {
             question: "the quick fox jumps over the lazy dog",
@@ -46,17 +50,26 @@ const PricingFAQs = () => {
                     <div key={index} className="border-b border-gray-200 pb-4">
                         <button
                             className="w-full text-left flex items-start justify-between py-4 focus:outline-none"
+                            onClick={() => {
+                                if (hideanswerid === index) {
+                                    setHideAnswerid(-1);
+                                } else {
+                                    setHideAnswerid(index);
+                                }
+                            }}
                         >
                             <div className="flex items-start space-x-3">
                                 <div className="text-blue-500">
-                                     <ChevronRight />
+                                    <ChevronRight
+                                        className={`h-5 w-5 transition-transform duration-200 ${hideanswerid === index ? 'rotate-90' : 'rotate-0'}`}
+                                    />
                                 </div>
                                 <span className="font-medium text-gray-900">
                                     {faq.question}
                                 </span>
                             </div>
                         </button>
-                        <div className="ml-8 pb-4">
+                        <div className={`ml-8 pb-4 transition-all duration-200 ${hideanswerid === index ? 'opacity-100 max-h-none' : 'opacity-0 max-h-0 overflow-hidden'}`}>
                             <p className="text-gray-600 text-sm">
                                 {faq.answer}
                             </p>

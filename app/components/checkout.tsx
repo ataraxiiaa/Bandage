@@ -16,6 +16,7 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
   const email = searchParams.get('email') || '';
+  const plan = searchParams.get('plan') || '';
 
   useEffect(() => {
     const createPaymentIntent = async () => {
@@ -69,7 +70,7 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
         elements,
         clientSecret,
         confirmParams: {
-          return_url: `${window.location.origin}/payment-success?amount=${amount}&email=${encodeURIComponent(email)}`,
+          return_url: `${window.location.origin}/payment-success?amount=${amount}&email=${encodeURIComponent(email)}&plan=${plan}`,
         },
         redirect: 'if_required', 
       });
@@ -78,7 +79,7 @@ const CheckoutPage = ({ amount }: { amount: number }) => {
         console.error(error);
         setErrorMessage(error.message);
       } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-        window.location.href = `/payment-success?amount=${amount}&payment_intent=${paymentIntent.id}&email=${encodeURIComponent(email)}`;
+        window.location.href = `/payment-success?amount=${amount}&payment_intent=${paymentIntent.id}&email=${encodeURIComponent(email)}&plan=${plan}`;
       }
     } catch (confirmError) {
       setErrorMessage("An unexpected error occurred. Please try again.");
