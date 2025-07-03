@@ -22,7 +22,7 @@ const Clients = () => {
                 </div>
                 <div className="grid md:grid-cols-3 lg:grid-cols-5 md:gap-8 place-items-center">
                     {clientLogos.map((client, index) => (
-                        <div key={index} className="flex items-center justify-center p-2">
+                        <div key={index} className="flex items-center justify-center p-2 hover:scale-120 transition-transform duration-300">
                             <Image
                                 src={client.src}
                                 alt={`${client.name} logo`}

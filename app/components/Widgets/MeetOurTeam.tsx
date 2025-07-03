@@ -51,7 +51,7 @@ const Team = ( {totalNumber = 3} : {totalNumber: number} ) => {
         };
 
         fetchTeamMembers();
-    }, []);
+    });
 
     
     if (loading) {
