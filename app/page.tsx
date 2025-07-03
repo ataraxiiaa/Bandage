@@ -13,7 +13,7 @@ export default function Home() {
       <Description />
       <Stats />
       <VideoCard />
-      <Team />
+      <Team totalNumber={3} />
       <Clients />
       <Testimonials/>
     </>

@@ -61,7 +61,7 @@ const PricingFAQs = () => {
                             <div className="flex items-start space-x-3">
                                 <div className="text-blue-500">
                                     <ChevronRight
-                                        className={`h-5 w-5 transition-transform duration-200 ${hideanswerid === index ? 'rotate-90' : 'rotate-0'}`}
+                                        className={`hidden md:flex h-5 w-5 transition-transform duration-200 ${hideanswerid === index ? 'rotate-90' : 'rotate-0'}`}
                                     />
                                 </div>
                                 <span className="font-medium text-gray-900">
@@ -69,7 +69,13 @@ const PricingFAQs = () => {
                                 </span>
                             </div>
                         </button>
-                        <div className={`ml-8 pb-4 transition-all duration-200 ${hideanswerid === index ? 'opacity-100 max-h-none' : 'opacity-0 max-h-0 overflow-hidden'}`}>
+                        <div
+                            className={`
+                                ml-8 pb-4 transition-all duration-200
+                                ${hideanswerid === index ? 'md:opacity-100 md:max-h-none' : 'md:opacity-0 md:max-h-0 md:overflow-hidden'}
+                                opacity-100 max-h-none
+                            `}
+                        >
                             <p className="text-gray-600 text-sm">
                                 {faq.answer}
                             </p>

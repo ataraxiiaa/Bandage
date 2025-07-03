@@ -6,7 +6,7 @@ import Card from "../Shared/Card";
 import { client } from "../../../sanity/lib/client";
 import { TeamMember } from "../../../types/team";
 
-const Team = () => {
+const Team = ( {totalNumber = 3} : {totalNumber: number} ) => {
     const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -26,15 +26,18 @@ const Team = () => {
                 console.log('Testing Sanity connection...');
                 const testQuery = await client.fetch('*[_type == "member"][0..2]');
                 console.log('Test query result:', testQuery);
-
-                const members = await client.fetch(`
-                    *[_type == "member"] | order(_createdAt asc) {
+                
+                const members = await client.fetch(
+                    `
+                    *[_type == "member"] | order(_createdAt asc)[0...$totalNumber] {
                         _id,
                         name,
                         position,
                         image
                     }
-                `);
+                    `,
+                    { totalNumber }
+                );
                 
                 console.log('Fetched members:', members);
                 setTeamMembers(members || []);
@@ -84,7 +87,7 @@ const Team = () => {
                 <div className="flex items-center justify-center gap-6 mt-10 flex-wrap">
                     {teamMembers.map((member) => (
                         <Card key={member._id}>
-                            <div className="w-70 h-70 overflow-hidden flex items-center justify-center bg-gray-100 rounded-t-lg">
+                            <div className="w-75 h-70 overflow-hidden flex items-center justify-center bg-gray-100">
                                 <Image 
                                     src={member.image} 
                                     alt={member.name}

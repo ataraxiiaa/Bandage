@@ -7,8 +7,9 @@ const VideoCard = () => {
                     height={250}
                     controls
                     poster="/videocard.jpg"
+                    className="rounded-lg shadow-lg"
                 >
-                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    <source src="/vid.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
             </div>

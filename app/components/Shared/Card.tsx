@@ -6,9 +6,9 @@ const Card = ({ children }: { children: React.ReactNode }) => {
             {children}
 
             <div className="flex items-center justify-center space-x-4 mt-4">
-                <FaFacebook className="text-blue-600" size={24} />
-                <FaInstagram className="text-blue-600" size={24} />
-                 <FaXTwitter className="text-blue-600" size={24} />
+                <FaFacebook className="text-blue-600 hover:cursor-pointer" size={24} />
+                <FaInstagram className="text-blue-600 hover:cursor-pointer" size={24} />
+                <FaXTwitter className="text-blue-600 hover:cursor-pointer" size={24} />
             </div>
         </div>
     );

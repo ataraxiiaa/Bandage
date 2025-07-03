@@ -167,7 +167,7 @@ const Hero = () => {
                     </div>
 
                     {/* Pricing Card */}
-                    <div className="flex flex-col p-6 w-full lg:w-80 text-center text-gray-900 bg-white border border-blue-400 shadow dark:border-blue-400 dark:bg-gray-800 dark:text-white transform lg:scale-110 lg:-my-4 lg:z-10">
+                    <div className="flex mt-2 flex-col p-6 w-full lg:w-80 text-center text-gray-900 bg-white border border-blue-400 shadow dark:border-blue-400 dark:bg-gray-800 dark:text-white transform lg:scale-110 lg:-my-4 lg:z-10">
                         <h3 className="mb-4 text-2xl font-semibold">STANDARD</h3>
                         <p className="font-bold text-white">Organize across all apps by hand</p>
                         <div className="flex justify-center items-baseline my-8 text-blue-400">
@@ -207,7 +207,7 @@ const Hero = () => {
                         <button onClick={() => { setshowModal(true); setSelectedPrice(prices[1]) }} className="text-white bg-[#23A6F0] hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-primary-900 hover:bg-blue-600 transition">Get started</button>
                     </div>
                     {/* Pricing Card */}
-                    <div className="flex flex-col p-6 w-full lg:w-80 text-center text-gray-900 bg-white border border-blue-400 shadow">
+                    <div className="flex mt-2 flex-col p-6 w-full lg:w-80 text-center text-gray-900 bg-white border border-blue-400 shadow">
                         <h3 className="mb-4 text-2xl font-semibold t">PREMIUM</h3>
                         <p className="font-bold text-gray-500">Organize across all apps by hand</p>
                         <div className="flex justify-center items-baseline my-8 text-blue-400">

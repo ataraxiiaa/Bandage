@@ -20,7 +20,7 @@ const Page = () => {
             </div>
 
             <Gallery />
-            <Team />
+            <Team totalNumber={9} />
             <FreeTrial />
         </>
     );

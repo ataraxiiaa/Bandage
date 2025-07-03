@@ -11,22 +11,24 @@ const Clients = () => {
     ];
 
     return (
-        <section className="bg-gray-100 px-4 py-16">
+        <section className="bg-gray-100 px-4 py-8 md:py-16">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col items-center">
-                    <p className="text-md font-bold text-center text-gray-700 max-w-sm mb-12">
-                        Trusted By Over 4000 Big Companies
+                    <h1 className="text-2xl md:text-3xl font-bold text-center mb-2">Big Companies Are Here</h1>
+                    <p className="text-sm md:text-base text-center text-gray-700 max-w-sm md:max-w-md mb-8 md:mb-12">
+                        Problems trying to resolve the conflict between
+                        the two major realms of Classical physics: Newtonian mechanics
                     </p>
                 </div>
-                <div className="flex flex-wrap justify-center items-center gap-8 mb-5">
+                <div className="grid md:grid-cols-3 lg:grid-cols-5 md:gap-8 place-items-center">
                     {clientLogos.map((client, index) => (
-                        <div key={index} className="flex items-center justify-center">
+                        <div key={index} className="flex items-center justify-center p-2">
                             <Image
                                 src={client.src}
                                 alt={`${client.name} logo`}
                                 width={120}
                                 height={60}
-                                className="object-contain"
+                                className="object-contain w-30 h-25 md:w-30 md:h-30 lg:w-24 lg:h-12 max-w-full"
                             />
                         </div>
                     ))}
